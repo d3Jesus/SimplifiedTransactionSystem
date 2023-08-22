@@ -1,4 +1,5 @@
 ﻿using ImprovedPicpay.Services;
+using ImprovedPicpay.ViewModels.Users;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ImprovedPicpay.Controllers
@@ -18,6 +19,17 @@ namespace ImprovedPicpay.Controllers
         public async Task<IActionResult> Get()
         {
             return Ok(await _userService.GetAllAsync());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(AddUserViewModel model)
+        {
+            var response = await _userService.AddAsync(model);
+
+            if (!response.Succeeded)
+                return BadRequest(response);
+
+            return CreatedAtAction(nameof(Get), null);
         }
     }
 }

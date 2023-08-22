@@ -42,11 +42,16 @@ namespace ImprovedPicpay.Models
         /// <summary>
         /// Specifies if the users is locked or not.
         /// </summary>
-        public bool IsLocked { get; set; }
+        public bool IsLocked { get; set; } = false;
 
         /// <summary>
         /// Specifies the type of user.
         /// </summary>
         public string UserType { get; set; } = UserTypes.Common.ToString();
+
+        public static implicit operator bool(User v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -16,4 +16,17 @@ public static class UserMapper
             isLocked = us.IsLocked
         }).ToList();
     }
+
+    public static User MapToUser(AddUserViewModel viewModel)
+    {
+        return new User
+        {
+            UserFirstName = viewModel.FirstName,
+            UserMiddleName = viewModel.MiddleName,
+            UserLastName = viewModel.LastName,
+            Email = viewModel.Email,
+            UserType = viewModel.UserType,
+            Password = viewModel.Password
+        };
+    }
 }

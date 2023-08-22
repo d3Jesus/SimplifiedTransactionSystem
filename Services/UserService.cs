@@ -1,4 +1,5 @@
-﻿using ImprovedPicpay.Mappers;
+﻿using ImprovedPicpay.Helpers;
+using ImprovedPicpay.Mappers;
 using ImprovedPicpay.Repositories;
 using ImprovedPicpay.ViewModels.Users;
 
@@ -17,6 +18,11 @@ namespace ImprovedPicpay.Services
         {
             var users = await _userRepository.GetAllAsync();
             return UserMapper.MapToViewModel(users);
+        }
+
+        public async Task<ServiceResponse<bool>> AddAsync(AddUserViewModel viewModel)
+        {
+            return await _userRepository.AddAsync(UserMapper.MapToUser(viewModel));
         }
     }
 }
