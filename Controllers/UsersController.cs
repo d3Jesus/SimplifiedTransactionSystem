@@ -37,5 +37,16 @@ namespace ImprovedPicpay.Controllers
 
             return CreatedAtAction(nameof(Get), null);
         }
+
+        [HttpPut]
+        public async Task<IActionResult> Update(UpdateUserViewModel model)
+        {
+            var response = await _userService.UpdateAsync(model);
+
+            if (!response.Succeeded)
+                return BadRequest(response);
+
+            return Ok();
+        }
     }
 }
