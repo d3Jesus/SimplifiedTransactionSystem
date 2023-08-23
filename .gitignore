@@ -33,3 +33,7 @@
 /obj/Debug/net7.0/ImprovedPicpay.csproj.CoreCompileInputs.cache
 /obj/Debug/net7.0/ImprovedPicpay.csproj.BuildWithSkipAnalyzers
 /obj/Debug/net7.0/refint/ImprovedPicpay.dll
+*.v2
+/.vs/ProjectEvaluation/improvedpicpay.metadata.v6.1
+/.vs/ProjectEvaluation/improvedpicpay.projects.v6.1
+/obj/Debug/net7.0/project.razor.vs.json

@@ -7,7 +7,7 @@ namespace ImprovedPicpay.Models
         /// <summary>
         /// User unique ID
         /// </summary>
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// User's first name.

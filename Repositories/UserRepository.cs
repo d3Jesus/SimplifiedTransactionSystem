@@ -25,7 +25,7 @@ namespace ImprovedPicpay.Repositories
         {
             try
             {
-                user.Id = Guid.NewGuid();
+                user.Id = Guid.NewGuid().ToString();
                 _context.Users.Add(user);
                 await _context.SaveChangesAsync();
 
