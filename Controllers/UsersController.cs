@@ -21,6 +21,12 @@ namespace ImprovedPicpay.Controllers
             return Ok(await _userService.GetAllAsync());
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(string id)
+        {
+            return Ok(await _userService.GetByAsync(id));
+        }
+
         [HttpPost]
         public async Task<IActionResult> Add(AddUserViewModel model)
         {

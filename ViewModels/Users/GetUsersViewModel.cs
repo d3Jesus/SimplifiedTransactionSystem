@@ -1,6 +1,7 @@
 ﻿namespace ImprovedPicpay.ViewModels.Users;
 
-public record  struct GetUsersViewModel(string firstName,
+public record  struct GetUsersViewModel(string id,
+                                        string firstName,
                                         string middleName,
                                         string lastName,
                                         DateTime registeredIn,

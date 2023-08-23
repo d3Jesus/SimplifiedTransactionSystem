@@ -20,6 +20,12 @@ namespace ImprovedPicpay.Services
             return UserMapper.MapToViewModel(users);
         }
 
+        public async Task<GetUsersViewModel> GetByAsync(string id)
+        {
+            var user = await _userRepository.GetByAsync(id);
+            return UserMapper.MapToViewModel(user);
+        }
+
         public async Task<ServiceResponse<bool>> AddAsync(AddUserViewModel viewModel)
         {
             return await _userRepository.AddAsync(UserMapper.MapToUser(viewModel));
