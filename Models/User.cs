@@ -53,5 +53,10 @@ namespace ImprovedPicpay.Models
         /// User document number
         /// </summary>
         public string Document { get; set; }
+
+        /// <summary>
+        /// User's balance
+        /// </summary>
+        public decimal Balance { get; set; }
     }
 }
