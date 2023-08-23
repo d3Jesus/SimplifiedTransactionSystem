@@ -26,6 +26,20 @@ namespace ImprovedPicpay.Repositories
         {
             try
             {
+                if (IsEmailAvailable(user.Email))
+                    return new ServiceResponse<bool>
+                    {
+                        Succeeded = false,
+                        Message = "The user email is not available."
+                    };
+
+                if (IsDocumentAvailable(user.Document))
+                    return new ServiceResponse<bool>
+                    {
+                        Succeeded = false,
+                        Message = "The user document is already in use."
+                    };
+
                 user.Id = Guid.NewGuid().ToString();
                 _context.Users.Add(user);
                 await _context.SaveChangesAsync();
@@ -52,6 +66,20 @@ namespace ImprovedPicpay.Repositories
         {
             try
             {
+                if (IsEmailAvailable(user.Email))
+                    return new ServiceResponse<bool>
+                    {
+                        Succeeded = false,
+                        Message = "The user email is not available."
+                    };
+
+                if (IsDocumentAvailable(user.Document))
+                    return new ServiceResponse<bool>
+                    {
+                        Succeeded = false,
+                        Message = "The user document is already in use."
+                    };
+
                 User existingUser = await GetByAsync(user.Id);
 
                 if (existingUser == null)
@@ -85,5 +113,8 @@ namespace ImprovedPicpay.Repositories
         }
 
         public async Task<User> GetByAsync(string id) => await _context.Users.Where(us => us.Id.Equals(id)).AsNoTracking().FirstOrDefaultAsync();
+
+        public bool IsEmailAvailable(string email) => _context.Users.Any(us => us.Email.Equals(email));
+        public bool IsDocumentAvailable(string document) => _context.Users.Any(us => us.Id.Equals(document));
     }
 }

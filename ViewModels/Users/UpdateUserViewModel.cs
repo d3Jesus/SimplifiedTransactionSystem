@@ -24,4 +24,7 @@ public class UpdateUserViewModel
 
     [Required(ErrorMessage = "The user password is required.")]
     public string Password { get; set; } = string.Empty;
+
+    [Required(ErrorMessage = "The user document is required.")]
+    public string Document { get; set; } = string.Empty;
 }

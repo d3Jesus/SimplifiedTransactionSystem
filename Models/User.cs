@@ -49,9 +49,9 @@ namespace ImprovedPicpay.Models
         /// </summary>
         public string UserType { get; set; } = UserTypes.Common.ToString();
 
-        public static implicit operator bool(User v)
-        {
-            throw new NotImplementedException();
-        }
+        /// <summary>
+        /// User document number
+        /// </summary>
+        public string Document { get; set; }
     }
 }
