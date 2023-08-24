@@ -15,8 +15,8 @@ public class TransactionMapper
         return transaction.Select(tr => new GetTransactionsViewModel
         {
             id = tr.Id,
-            senderName = string.Concat(tr.Sender.UserFirstName, " ", tr.Sender.UserMiddleName, " ", tr.Sender.UserLastName),
-            receiverName = string.Concat(tr.Sender.UserFirstName, " ", tr.Sender.UserMiddleName, " ", tr.Sender.UserLastName),
+            senderId = tr.From,
+            receiverId = tr.To,
             amount = tr.Amount,
             timestamp = tr.Timestamp
         }).ToList();
