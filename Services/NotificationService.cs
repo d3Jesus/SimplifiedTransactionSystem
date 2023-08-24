@@ -41,7 +41,7 @@ public class NotificationService
             {
                 _logger.LogError(ex, ex.Message, " -- An error occored in notification service. --");
                 serviceResponse.Succeeded = false;
-                serviceResponse.Message = "-- Internal error! --";
+                serviceResponse.Message = "-- Notification Service Error: Internal error! --";
             }
             return serviceResponse;
         }
