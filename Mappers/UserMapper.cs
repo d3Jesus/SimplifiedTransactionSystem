@@ -60,6 +60,7 @@ public static class UserMapper
             UserLastName = viewModel.LastName,
             Email = viewModel.Email,
             UserType = viewModel.UserType,
+            Balance = viewModel.Balance,
             Password = viewModel.Password
         };
     }
@@ -80,6 +81,7 @@ public static class UserMapper
             UserLastName = viewModel.LastName,
             Email = viewModel.Email,
             UserType = viewModel.UserType,
+            Balance = viewModel.Balance,
             Password = viewModel.Password
         };
     }
@@ -96,6 +98,7 @@ public static class UserMapper
         existingUser.UserLastName = user.UserLastName;
         existingUser.Email = user.Email;
         existingUser.UserType = user.UserType;
+        existingUser.Balance = user.Balance;
         existingUser.Password = user.Password;
 
         return existingUser;
