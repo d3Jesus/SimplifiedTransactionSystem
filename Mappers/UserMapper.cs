@@ -18,6 +18,8 @@ public static class UserMapper
             firstName = us.UserFirstName,
             middleName = us.UserMiddleName,
             lastName = us.UserLastName,
+            userType = us.UserType,
+            balance = us.Balance,
             registeredIn = us.DateOfRegistration,
             isLocked = us.IsLocked
         }).ToList();
@@ -36,6 +38,8 @@ public static class UserMapper
             firstName = user.UserFirstName,
             middleName = user.UserMiddleName,
             lastName = user.UserLastName,
+            userType = user.UserType,
+            balance = user.Balance,
             registeredIn = user.DateOfRegistration,
             isLocked = user.IsLocked
         };
