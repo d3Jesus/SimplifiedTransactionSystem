@@ -18,19 +18,19 @@ We have 2 types of users, common users and shopkeepers, both have wallets with m
 ### Tasks
 - [x] For both types of user, we need the Full Name, Document Number, email and Password. Document Number and e-mails must be unique in the system. Therefore, your system should allow only one registration with the same Document Number or email address.
 
-[x] Users can send money (make transfers) to merchants and between users.
+- [x] Users can send money (make transfers) to merchants and between users.
 
-[x] Shopkeepers only receive transfers, they do not send money to anyone.
+- [x] Shopkeepers only receive transfers, they do not send money to anyone.
 
-[x] Validate that the user has a balance before the transfer.
+- [x] Validate that the user has a balance before the transfer.
 
-[x] Before finalizing the transfer, you must consult an external authorizing service, use this mock to simulate (https://run.mocky.io/v3/8fafdd68-a090-496f-8c9a-3442cf30dae6).
+- [x] Before finalizing the transfer, you must consult an external authorizing service, use this mock to simulate (https://run.mocky.io/v3/8fafdd68-a090-496f-8c9a-3442cf30dae6).
 
-[x] The transfer operation must be a transaction (i.e. reversed in any case of inconsistency) and the money must be returned to the sending user's wallet.
+- [x] The transfer operation must be a transaction (i.e. reversed in any case of inconsistency) and the money must be returned to the sending user's wallet.
 
-[x] Upon receipt of payment, the user or merchant needs to receive notification (email, sms) sent by a third-party service and eventually this service may be unavailable/unstable. Use this mockup to simulate sending (http://o4d9z.mocklab.io/notify).
+- [x] Upon receipt of payment, the user or merchant needs to receive notification (email, sms) sent by a third-party service and eventually this service may be unavailable/unstable. Use this mockup to simulate sending (http://o4d9z.mocklab.io/notify).
 
-[x] This service must be RESTFul.
+- [x] This service must be RESTFul.
 
 ### User Endpoints
 ![User-Endpoints](https://github.com/d3Jesus/SimplifiedTransactionSystem/blob/main/assets/User-Endpoints.PNG)
