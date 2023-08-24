@@ -25,5 +25,8 @@ namespace ImprovedPicpay.ViewModels.Users
         
         [Required(ErrorMessage = "The user document is required.")]
         public string Document { get; set; } = string.Empty;
+        
+        [Required(ErrorMessage = "The user current balance is required.")]
+        public decimal Balance { get; set; }
     }
 }
