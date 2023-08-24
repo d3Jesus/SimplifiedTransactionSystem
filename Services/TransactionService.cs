@@ -18,4 +18,16 @@ public class TransactionService
     {
         return await _repository.CreateAsync(TransactionMapper.MapToUser(model));
     }
+
+    public async Task<List<GetTransactionsViewModel>> GetAllAsync()
+    {
+        var transactions = await _repository.GetAsync();
+        return TransactionMapper.MapToViewModel(transactions);
+    }
+
+    public async Task<List<GetTransactionsViewModel>> GetByAsync(string senderId)
+    {
+        var transactions = await _repository.GetByAsync(senderId);
+        return TransactionMapper.MapToViewModel(transactions);
+    }
 }

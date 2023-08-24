@@ -3,6 +3,7 @@ using ImprovedPicpay.Enums;
 using ImprovedPicpay.Helpers;
 using ImprovedPicpay.Models;
 using ImprovedPicpay.Services;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
 namespace ImprovedPicpay.Repositories;
@@ -45,12 +46,12 @@ public class TransactionRepository
             User sender = await _userRepository.GetByAsync(transaction.From);
             User receiver = await _userRepository.GetByAsync(transaction.To);
 
-            if (!(await IsAuthorized()))
-                return new ServiceResponse<bool>
-                {
-                    Succeeded = false,
-                    Message = "You are not authorized."
-                };
+            //if (!(await IsAuthorized()))
+            //    return new ServiceResponse<bool>
+            //    {
+            //        Succeeded = false,
+            //        Message = "You are not authorized."
+            //    };
 
             if (!(await IsCommonUser(sender.Id)))
                 return new ServiceResponse<bool>
@@ -95,6 +96,21 @@ public class TransactionRepository
             };
         }
     }
+
+    /// <summary>
+    /// Retrive all transactions.
+    /// </summary>
+    /// <returns>List of transactions</returns>
+    public async Task<IEnumerable<Transaction>> GetAsync() => await _context.Transactions.ToListAsync();
+
+    /// <summary>
+    /// Retrive all transactions made by user with the given ID.
+    /// </summary>
+    /// <returns>List of transactions of user with the given ID</returns>
+    public async Task<IEnumerable<Transaction>> GetByAsync(string senderId) 
+        => await _context.Transactions
+                         .Where(tr => tr.From.Equals(senderId))
+                         .ToListAsync();
 
     /// <summary>
     /// Verify if a user(sender) with the given ID has enough balance to perform this operation.
