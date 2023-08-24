@@ -16,7 +16,7 @@ STF is my solution for a bank transfer system as part of a challenge for a job (
 We have 2 types of users, common users and shopkeepers, both have wallets with money and transfer money between them.
 
 ### Tasks
-[x] For both types of user, we need the Full Name, Document Number, email and Password. Document Number and e-mails must be unique in the system. Therefore, your system should allow only one registration with the same Document Number or email address.
+- [x] For both types of user, we need the Full Name, Document Number, email and Password. Document Number and e-mails must be unique in the system. Therefore, your system should allow only one registration with the same Document Number or email address.
 
 [x] Users can send money (make transfers) to merchants and between users.
 
