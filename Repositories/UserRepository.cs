@@ -26,14 +26,14 @@ namespace ImprovedPicpay.Repositories
         {
             try
             {
-                if (IsEmailAvailable(user.Email))
+                if (IsEmailTaken(user.Email))
                     return new ServiceResponse<bool>
                     {
                         Succeeded = false,
                         Message = "The user email is not available."
                     };
 
-                if (IsDocumentAvailable(user.Document))
+                if (IsDocumentTaken(user.Document))
                     return new ServiceResponse<bool>
                     {
                         Succeeded = false,
@@ -66,14 +66,7 @@ namespace ImprovedPicpay.Repositories
         {
             try
             {
-                if (IsEmailAvailable(user.Email))
-                    return new ServiceResponse<bool>
-                    {
-                        Succeeded = false,
-                        Message = "The user email is not available."
-                    };
-
-                if (IsDocumentAvailable(user.Document))
+                if (IsDocumentTaken(user.Document))
                     return new ServiceResponse<bool>
                     {
                         Succeeded = false,
@@ -87,6 +80,13 @@ namespace ImprovedPicpay.Repositories
                     {
                         Succeeded = false,
                         Message = "User does not exist."
+                    };
+
+                if (!existingUser.Email.Equals(user.Email) && IsEmailTaken(user.Email))
+                    return new ServiceResponse<bool>
+                    {
+                        Succeeded = false,
+                        Message = "The user email is not available."
                     };
 
                 existingUser.MapFromUserToUser(user);
@@ -114,7 +114,7 @@ namespace ImprovedPicpay.Repositories
 
         public async Task<User> GetByAsync(string id) => await _context.Users.Where(us => us.Id.Equals(id)).AsNoTracking().FirstOrDefaultAsync();
 
-        public bool IsEmailAvailable(string email) => _context.Users.Any(us => us.Email.Equals(email));
-        public bool IsDocumentAvailable(string document) => _context.Users.Any(us => us.Id.Equals(document));
+        public bool IsEmailTaken(string email) => _context.Users.Any(us => us.Email.Equals(email));
+        public bool IsDocumentTaken(string document) => _context.Users.Any(us => us.Id.Equals(document));
     }
 }
