@@ -69,6 +69,7 @@ public class TransactionRepository
             sender.Balance -= transaction.Amount;
             receiver.Balance += transaction.Amount;
 
+            transaction.Id = Guid.NewGuid().ToString();
             _context.Transactions.Add(transaction);
             await _context.SaveChangesAsync();
 
