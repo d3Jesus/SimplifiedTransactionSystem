@@ -7,11 +7,8 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 var builder = WebApplication.CreateBuilder(args);
 
 // .NET configuration to host in fl0.com
-builder.Host.ConfigureWebHostDefaults(webBuilder =>
-{
-	var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
-	webBuilder.UseUrls($"http://*:{port}/");
-});
+var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+builder.WebHost.UseUrls($"http://*:{port}/");
 
 // Add services to the container.
 string databaseName = "simplified";
