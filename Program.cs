@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // .NET configuration to host in fl0.com
 var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
-builder.WebHost.UseUrls($"http://*:{port}/");
+builder.WebHost.UseUrls($"https://*:{port}/");
 
 // Add services to the container.
 string databaseName = "simplified";
