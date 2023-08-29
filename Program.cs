@@ -32,12 +32,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-//app.UseHttpsRedirection();
+app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.MapControllers();
 
-// .NET configuration to host in fl0.com
-var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
-app.Run($"http://*:{port}/");
+app.Run();
