@@ -1,6 +1,8 @@
 ﻿using ImprovedPicpay.Services;
 using ImprovedPicpay.ViewModels.Users;
 using Carter;
+using MediatR;
+using ImprovedPicpay.Features.Users;
 
 namespace ImprovedPicpay.Controllers;
 
@@ -20,14 +22,14 @@ public class UsersEndpoints : ICarterModule
             return Results.Ok(await userService.GetByAsync(id));
         });
 
-        route.MapPost("", async (AddUserViewModel model, UserService service) =>
+        route.MapPost("", async (CreateUser.Command command, ISender sender) =>
         {
-            var response = await service.AddAsync(model);
+            var result = await sender.Send(command);
 
-            if (!response.Succeeded)
-                return Results.BadRequest("Error creating");
+            if (result.IsFailure)
+                return Results.BadRequest(result.Error);
 
-            return Results.Ok("Created");
+            return Results.Ok(result.Data);
         });
 
         route.MapPut("", async (UpdateUserViewModel model, UserService service) =>

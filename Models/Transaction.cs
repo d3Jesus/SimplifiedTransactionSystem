@@ -1,4 +1,6 @@
-﻿namespace ImprovedPicpay.Models;
+﻿using ImprovedPicpay.Features.Users;
+
+namespace ImprovedPicpay.Models;
 
 public class Transaction
 {

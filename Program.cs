@@ -1,9 +1,11 @@
 using Carter;
+using FluentValidation;
 using ImprovedPicpay.Data;
 using ImprovedPicpay.Repositories;
 using ImprovedPicpay.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +18,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddScoped<UserRepository>().AddScoped<UserService>();
 builder.Services.AddScoped<TransactionRepository>().AddScoped<TransactionService>();
 builder.Services.AddScoped<NotificationService>();
+
+var assembly = Assembly.GetExecutingAssembly();
+
+builder.Services.AddMediatR(config => config.RegisterServicesFromAssembly(assembly));
+
+builder.Services.AddValidatorsFromAssembly(assembly);
 
 builder.Services.AddCarter();
 

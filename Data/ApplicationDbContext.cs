@@ -1,4 +1,5 @@
-﻿using ImprovedPicpay.Models;
+﻿using ImprovedPicpay.Features.Users;
+using ImprovedPicpay.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace ImprovedPicpay.Data;

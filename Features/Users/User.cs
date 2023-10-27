@@ -1,6 +1,6 @@
 ﻿using ImprovedPicpay.Enums;
 
-namespace ImprovedPicpay.Models
+namespace ImprovedPicpay.Features.Users
 {
     public class User
     {
@@ -28,7 +28,7 @@ namespace ImprovedPicpay.Models
         /// User's email address that will be used to log in.
         /// </summary>
         public string Email { get; set; } = string.Empty;
-        
+
         /// <summary>
         /// User's password that will be used to log in.
         /// </summary>

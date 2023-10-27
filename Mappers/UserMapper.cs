@@ -1,4 +1,4 @@
-﻿using ImprovedPicpay.Models;
+﻿using ImprovedPicpay.Features.Users;
 using ImprovedPicpay.ViewModels.Users;
 
 namespace ImprovedPicpay.Mappers;
