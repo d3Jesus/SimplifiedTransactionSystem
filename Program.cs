@@ -1,3 +1,4 @@
+using Carter;
 using ImprovedPicpay.Data;
 using ImprovedPicpay.Repositories;
 using ImprovedPicpay.Services;
@@ -15,6 +16,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddScoped<UserRepository>().AddScoped<UserService>();
 builder.Services.AddScoped<TransactionRepository>().AddScoped<TransactionService>();
 builder.Services.AddScoped<NotificationService>();
+
+builder.Services.AddCarter();
 
 builder.Services.AddHttpClient();
 
@@ -37,5 +40,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapCarter();
 
 app.Run();
