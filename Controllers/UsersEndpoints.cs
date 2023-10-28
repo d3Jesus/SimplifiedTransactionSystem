@@ -22,16 +22,6 @@ public class UsersEndpoints : ICarterModule
             return Results.Ok(await userService.GetByAsync(id));
         });
 
-        route.MapPost("", async (CreateUser.Command command, ISender sender) =>
-        {
-            var result = await sender.Send(command);
-
-            if (result.IsFailure)
-                return Results.BadRequest(result.Error);
-
-            return Results.Ok(result.Data);
-        });
-
         route.MapPut("", async (UpdateUserViewModel model, UserService service) =>
         {
             var response = await service.UpdateAsync(model);

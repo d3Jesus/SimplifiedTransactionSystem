@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using Carter;
+using FluentValidation;
 using ImprovedPicpay.Data;
 using ImprovedPicpay.Helpers;
 using Mapster;
@@ -63,5 +64,21 @@ public static class CreateUser
 
             return user.Id;
         }
+    }
+}
+
+public class Endpoint : ICarterModule
+{
+    public void AddRoutes(IEndpointRouteBuilder app)
+    {
+        app.MapPost("users", async (CreateUser.Command command, ISender sender) =>
+        {
+            var result = await sender.Send(command);
+
+            if (result.IsFailure)
+                return Results.BadRequest(result.Error);
+
+            return Results.Ok(result.Data);
+        });
     }
 }
