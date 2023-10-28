@@ -1,4 +1,5 @@
 ﻿using Carter;
+using FluentValidation;
 using ImprovedPicpay.Data;
 using ImprovedPicpay.Helpers;
 using Mapster;
@@ -11,17 +12,36 @@ public static partial class GetUserById
 {
     public record Query(string Id) : IRequest<ServiceResponse<UsersResponse>>;
 
+    public class Validator : AbstractValidator<Query>
+    {
+        public Validator()
+        {
+            RuleFor(c => c.Id)
+                .NotEmpty()
+                .NotNull();
+        }
+    }
+
     internal sealed class Handler : IRequestHandler<Query, ServiceResponse<UsersResponse>>
     {
         private readonly ApplicationDbContext _context;
+        private readonly IValidator<Query> _validator;
 
-        public Handler(ApplicationDbContext context)
+        public Handler(ApplicationDbContext context, IValidator<Query> validator)
         {
             _context = context;
+            _validator = validator;
         }
 
         public async Task<ServiceResponse<UsersResponse>> Handle(Query request, CancellationToken cancellationToken)
         {
+            var validationResult = _validator.Validate(request);
+            if (!validationResult.IsValid)
+            {
+                return ServiceResponse.Failure<UsersResponse>(
+                    new Error("GetUserById.Validation", validationResult.ToString()));
+            }
+
             var result = await _context.Users
                 .FirstOrDefaultAsync(user => user.Id.Equals(request.Id));
 
