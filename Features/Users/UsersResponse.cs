@@ -1,8 +1,6 @@
 ﻿namespace ImprovedPicpay.Features.Users;
 
-public static partial class GetUserById
-{
-    public record UsersResponse(string Id,
+public record UsersResponse(string Id,
                                 string FirstName,
                                 string MiddleName,
                                 string LastName,
@@ -10,4 +8,3 @@ public static partial class GetUserById
                                 decimal Balance,
                                 DateTime RegisteredIn,
                                 bool IsLocked);
-}
