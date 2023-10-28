@@ -12,11 +12,6 @@ public class UsersEndpoints : ICarterModule
     {
         var route = app.MapGroup("api/users");
 
-        route.MapGet("", async (UserService userService) =>
-        {
-            return Results.Ok(await userService.GetAllAsync());
-        });
-
         route.MapGet("{id}", async (string id, UserService userService) =>
         {
             return Results.Ok(await userService.GetByAsync(id));
