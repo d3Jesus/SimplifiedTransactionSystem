@@ -68,7 +68,7 @@ public static class CreateUser
     }
 }
 
-public class Endpoint : ICarterModule
+public class CreateUserEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
