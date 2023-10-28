@@ -2,6 +2,7 @@
 using FluentValidation;
 using ImprovedPicpay.Data;
 using ImprovedPicpay.Helpers;
+using ImprovedPicpay.Entities;
 using Mapster;
 using MediatR;
 

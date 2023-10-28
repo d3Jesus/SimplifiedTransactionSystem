@@ -1,6 +1,6 @@
 ﻿using ImprovedPicpay.Enums;
 
-namespace ImprovedPicpay.Features.Users
+namespace ImprovedPicpay.Entities
 {
     public class User
     {

@@ -1,5 +1,5 @@
-﻿using ImprovedPicpay.Features.Users;
-using ImprovedPicpay.Helpers;
+﻿using ImprovedPicpay.Helpers;
+using ImprovedPicpay.Entities;
 using ImprovedPicpay.ViewModels.Transaction;
 
 namespace ImprovedPicpay.Services;

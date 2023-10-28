@@ -1,7 +1,7 @@
 ﻿using ImprovedPicpay.Data;
-using ImprovedPicpay.Features.Users;
 using ImprovedPicpay.Helpers;
 using ImprovedPicpay.Mappers;
+using ImprovedPicpay.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace ImprovedPicpay.Repositories

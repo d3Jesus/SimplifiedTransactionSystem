@@ -1,8 +1,7 @@
 ﻿using ImprovedPicpay.Data;
 using ImprovedPicpay.Enums;
-using ImprovedPicpay.Features.Users;
 using ImprovedPicpay.Helpers;
-using ImprovedPicpay.Models;
+using ImprovedPicpay.Entities;
 using ImprovedPicpay.Services;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
