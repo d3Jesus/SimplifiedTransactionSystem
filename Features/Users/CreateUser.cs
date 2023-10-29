@@ -72,7 +72,7 @@ public class CreateUserEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPost("users", async (CreateUser.Command command, ISender sender) =>
+        app.MapPost("api/users", async (CreateUser.Command command, ISender sender) =>
         {
             var result = await sender.Send(command);
 
