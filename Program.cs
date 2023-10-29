@@ -15,7 +15,6 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseInMemoryDatabase(databaseName)
            .ConfigureWarnings(x => x.Ignore(InMemoryEventId.TransactionIgnoredWarning)));
 
-builder.Services.AddScoped<UserRepository>().AddScoped<UserService>();
 builder.Services.AddScoped<TransactionRepository>().AddScoped<TransactionService>();
 builder.Services.AddScoped<NotificationService>();
 

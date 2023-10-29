@@ -89,7 +89,7 @@ namespace ImprovedPicpay.Repositories
                         Message = "The user email is not available."
                     };
 
-                existingUser.MapFromUserToUser(user);
+                //existingUser.MapFromUserToUser(user);
 
                 _context.Entry(existingUser).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
