@@ -1,7 +1,6 @@
 using Carter;
 using FluentValidation;
 using ImprovedPicpay.Data;
-using ImprovedPicpay.Repositories;
 using ImprovedPicpay.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -15,7 +14,6 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseInMemoryDatabase(databaseName)
            .ConfigureWarnings(x => x.Ignore(InMemoryEventId.TransactionIgnoredWarning)));
 
-builder.Services.AddScoped<TransactionRepository>().AddScoped<TransactionService>();
 builder.Services.AddScoped<NotificationService>();
 
 var assembly = Assembly.GetExecutingAssembly();
