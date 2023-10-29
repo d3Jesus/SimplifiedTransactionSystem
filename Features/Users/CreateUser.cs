@@ -57,8 +57,23 @@ public static class CreateUser
                     new Error("CreateUser.Validation", validationResult.ToString()));
             }
 
+            bool isEmailTaken = _context.Users.Any(us => us.Email.Equals(request.Email));
+            if (isEmailTaken)
+            {
+                return ServiceResponse.Failure<string>(
+                    new Error("CreateUser.EnforceUniqueEmail", "The given user email is not available."));
+            }
+
+            bool isDocumentTaken = _context.Users.Any(us => us.Document.Equals(request.Document));
+            if (isDocumentTaken)
+            {
+                return ServiceResponse.Failure<string>(
+                    new Error("CreateUser.EnforceUniqueDocumentNumber", "The user document is already in use."));
+            }
+
             var user = request.Adapt<User>();
             user.Id = Guid.NewGuid().ToString();
+
             _context.Add(user);
 
             await _context.SaveChangesAsync(cancellationToken);

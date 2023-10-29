@@ -60,10 +60,25 @@ public static class UpdateUser
                     new Error("UpdateUser.Validation", validationResult.ToString()));
             }
 
+            bool isEmailTaken = _context.Users.Any(us => us.Email.Equals(request.Email));
+            if (isEmailTaken)
+            {
+                return ServiceResponse.Failure<UsersResponse>(
+                    new Error("CreateUser.EnforceUniqueEmail", "The given user email is not available."));
+            }
+
+            bool isDocumentTaken = _context.Users.Any(us => us.Document.Equals(request.Document));
+            if (isDocumentTaken)
+            {
+                return ServiceResponse.Failure<UsersResponse>(
+                    new Error("CreateUser.EnforceUniqueDocumentNumber", "The user document is already in use."));
+            }
+
             var user = _context.Users.FirstOrDefault(user => user.Id.Equals(request.Id));
             if (user is null)
                 return ServiceResponse.Failure<UsersResponse>(
                     new Error("UpdateUser.UserNotFound", validationResult.ToString()));
+
 
             _context.Entry(user).State = EntityState.Modified;
 
