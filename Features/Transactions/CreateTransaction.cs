@@ -1,5 +1,6 @@
 ﻿using Carter;
 using FluentValidation;
+using ImprovedPicpay.Abstractions;
 using ImprovedPicpay.Data;
 using ImprovedPicpay.Entities;
 using ImprovedPicpay.Enums;
@@ -30,11 +31,15 @@ public static class CreateTransaction
     {
         private readonly IValidator<TransactionCommand> _validator;
         private readonly ApplicationDbContext _context;
+        private readonly ITransactionService _transactionService;
 
-        public Handler(IValidator<TransactionCommand> validator, ApplicationDbContext context)
+        public Handler(IValidator<TransactionCommand> validator,
+                       ApplicationDbContext context,
+                       ITransactionService transactionService)
         {
             _validator = validator;
             _context = context;
+            _transactionService = transactionService;
         }
 
         public async Task<ServiceResponse<string>> Handle(TransactionCommand request, CancellationToken cancellationToken)
@@ -50,6 +55,12 @@ public static class CreateTransaction
             User receiver = await GetUser(request.ReceiverId);
 
             // Get authorization
+            var result = await _transactionService.IsAuthorized();
+            if (result)
+            {
+                return ServiceResponse.Failure<string>(
+                    new Error("CreateTransaction.TransactionNotAuthorized", "This transaction is not authorized."));
+            }
 
             bool senderIsCommonUser = sender.UserType.Equals(UserTypes.Common.ToString());
             if (senderIsCommonUser)

@@ -1,3 +1,9 @@
-﻿namespace ImprovedPicpay.Helpers;
+﻿using System.Text.Json.Serialization;
 
-public record struct ServiceAuthResponse(string message);
+namespace ImprovedPicpay.Helpers;
+
+public class ServiceAuthResponse
+{
+    [JsonPropertyName("message")]
+    public string Message { get; set; }
+}
