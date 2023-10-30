@@ -71,9 +71,16 @@ public static class CreateUser
                     new Error("CreateUser.EnforceUniqueDocumentNumber", "The user document is already in use."));
             }
 
-            var user = request.Adapt<User>();
-            user.Id = Guid.NewGuid().ToString();
-
+            var user = new User(Guid.NewGuid().ToString(),
+                                request.FirstName,
+                                request.MiddleName,
+                                request.LastName,
+                                request.Email,
+                                request.Password,
+                                request.UserType,
+                                request.Document,
+                                request.Balance);
+            
             _context.Add(user);
 
             await _context.SaveChangesAsync(cancellationToken);

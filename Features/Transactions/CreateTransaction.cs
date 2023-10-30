@@ -3,11 +3,10 @@ using FluentValidation;
 using ImprovedPicpay.Abstractions;
 using ImprovedPicpay.Data;
 using ImprovedPicpay.Entities;
-using ImprovedPicpay.Enums;
 using ImprovedPicpay.Helpers;
-using Mapster;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel;
 
 namespace ImprovedPicpay.Features.Transactions;
 
@@ -54,36 +53,13 @@ public static class CreateTransaction
             User sender = await GetUser(request.SenderId);
             User receiver = await GetUser(request.ReceiverId);
 
-            // Get authorization
-            var result = await _transactionService.IsAuthorized();
-            if (result)
-            {
-                return ServiceResponse.Failure<string>(
-                    new Error("CreateTransaction.TransactionNotAuthorized", "This transaction is not authorized."));
-            }
+            var transaction = sender.Transfer(receiver, request.Amount);
 
-            bool senderIsCommonUser = sender.UserType.Equals(UserTypes.Common.ToString());
-            if (senderIsCommonUser)
-            {
-                return ServiceResponse.Failure<string>(
-                    new Error("CreateTransaction.UserTypeCannotSendMoney", "Common users can only receive money."));
-            }
-
-            bool senderHasEnoughBalance = sender.Balance >= request.Amount;
-            if (!senderHasEnoughBalance)
-            {
-                return ServiceResponse.Failure<string>(
-                    new Error("CreateTransaction.LowBalance", "You don't have enough balance to perform this operation."));
-            }
-
-            sender.Balance -= request.Amount;
             _context.Entry(sender).State = EntityState.Modified;
 
-            receiver.Balance += request.Amount;
+            receiver.IncreaseBalance(request.Amount);
             _context.Entry(receiver).State = EntityState.Modified;
 
-            var transaction = request.Adapt<Transaction>();
-            transaction.Id = Guid.NewGuid().ToString();
             _context.Add(transaction);
 
             await _context.SaveChangesAsync(cancellationToken);
