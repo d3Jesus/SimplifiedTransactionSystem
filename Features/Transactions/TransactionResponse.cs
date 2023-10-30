@@ -1,7 +1,10 @@
 ﻿namespace ImprovedPicpay.Features.Transactions;
 
-public record TransactionResponse(string Id,
-                                  string SenderId,
-                                  string ReceiverId,
-                                  decimal Amount,
-                                  DateTime Timestamp);
+public class TransactionResponse
+{
+    public string Id { get; set; }
+    public string SenderId { get; set; }
+    public string ReceiverId { get; set; }
+    public decimal Amount { get; set; }
+    public DateTime Timestamp { get; set; }
+}
