@@ -108,6 +108,11 @@ namespace ImprovedPicpay.Entities
 
             var transaction = new Transaction(Guid.NewGuid().ToString(), Id, receiver.Id, amount);
 
+            RaiseEvent(new TransactionCompletedSuccessfulyDomainEvent(receiver.Email,
+                                                                      string.Concat(UserFirstName, " ", UserLastName),
+                                                                      amount,
+                                                                      $"{string.Concat(UserFirstName, " ", UserLastName)} just sent you {amount}."));
+
             _transactions.Add(transaction);
 
             return transaction;

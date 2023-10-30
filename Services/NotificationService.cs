@@ -1,10 +1,8 @@
-﻿using ImprovedPicpay.Helpers;
-using ImprovedPicpay.Entities;
-using ImprovedPicpay.ViewModels.Transaction;
+﻿using ImprovedPicpay.Abstractions;
 
 namespace ImprovedPicpay.Services;
 
-public class NotificationService
+public class NotificationService : INotificationService
 {
     private const string SERVICE = "http://o4d9z.mocklab.io/notify";
     private readonly ILogger<NotificationService> _logger;
@@ -16,34 +14,27 @@ public class NotificationService
         _httpClient = httpClient;
     }
 
-    public async Task<ServiceResponse<bool>> NotifyAsync(User user, string message)
+    public async Task NotifyAsync(string email, string message, CancellationToken cancellationToken)
     {
-        ServiceResponse<bool> serviceResponse = new();
         using (_httpClient)
         {
             try
             {
-                NotificationViewModel notification = new()
-                {
-                    email = user.Email,
-                    message = message
-                };
+                var notification = new NotificationResponse(email, message);
                 //Sending request to find web api REST service resource using HttpClient
-                var Res = await _httpClient.PostAsJsonAsync(SERVICE, notification);
+                var Res = await _httpClient.PostAsJsonAsync(SERVICE, notification, cancellationToken);
                 //Checking the response is successful or not which is sent using HttpClient
                 if (!Res.IsSuccessStatusCode)
                 {
-                    serviceResponse.Succeeded = false;
-                    serviceResponse.Message = "-- Connection error! --";
+                    _logger.LogError(" -- An error occurred in notification service. -- ");
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, ex.Message, " -- An error occored in notification service. --");
-                serviceResponse.Succeeded = false;
-                serviceResponse.Message = "-- Notification Service Error: Internal error! --";
+                _logger.LogError(ex, ex.Message, " -- An error occurred in notification service. -- ");
             }
-            return serviceResponse;
         }
     }
 }
+
+public sealed record NotificationResponse(string email, string message);
