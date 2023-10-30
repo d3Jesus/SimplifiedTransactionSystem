@@ -1,6 +1,8 @@
-﻿namespace ImprovedPicpay.Abstractions;
+﻿using ImprovedPicpay.Helpers;
+
+namespace ImprovedPicpay.Abstractions;
 
 public interface ITransactionService
 {
-    Task<bool> IsAuthorized();
+    Task<ServiceResponse<bool>> IsAuthorized();
 }

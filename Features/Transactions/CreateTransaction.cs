@@ -53,6 +53,12 @@ public static class CreateTransaction
             User sender = await GetUser(request.SenderId);
             User receiver = await GetUser(request.ReceiverId);
 
+            var result = await _transactionService.IsAuthorized();
+            if (result.IsFailure)
+            {
+                return ServiceResponse.Failure<string>(result.Error);
+            }
+
             var transaction = sender.Transfer(receiver, request.Amount);
 
             _context.Entry(sender).State = EntityState.Modified;
