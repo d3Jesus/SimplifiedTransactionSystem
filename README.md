@@ -6,8 +6,7 @@ STF is my solution for a bank transfer system as part of a challenge for a job (
 
 - [Overview](#overview)
   - [Tasks](#tasks)
-  - [User Endpoints](#user-endpoints)
-  - [Transaction Endpoints](#transaction-endpoints)
+  - [Endpoints](#endpoints)
   - [Built With](#built-with)
 - [How to use](#how-to-use)
 - [Author](#author)
@@ -33,10 +32,7 @@ We have 2 types of users, common users and shopkeepers, both have wallets with m
 - [x] This service must be RESTFul.
 
 ### User Endpoints
-![User-Endpoints](https://github.com/d3Jesus/SimplifiedTransactionSystem/blob/main/assets/User-Endpoints.PNG)
-
-### Transaction Endpoints
-![Transaction-Endpoints](https://github.com/d3Jesus/SimplifiedTransactionSystem/blob/main/assets/Transaction-Endpoints.PNG)
+![User-Endpoints](https://github.com/d3Jesus/SimplifiedTransactionSystem/blob/main/assets/Endpoints.PNG)
 
 ### Built with
 
